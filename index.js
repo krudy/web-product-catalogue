@@ -7,8 +7,22 @@ app.get('/', (req, res) => {
   res.send('homepage');
 });
 
-app.get('/zestawy/maly', (req, res) => {
-    res.send('maly zestawy!');
+app.get('/sets/:name', (req, res) => {
+  const { name } = req.params;
+
+  const giftSets = [
+    { slug: 'small', name: 'mały zestaw', price: 50 },
+    { slug: 'medium', name: 'średni zestaw', price: 80 },
+    { slug: 'large', name: 'duży zestaw', price: 140 }
+  ]
+
+  const giftSet = giftSets.find(s => s.slug === name);
+  if (giftSet) {
+    res.send(`wybrałeś ${giftSet?.name}`);
+  } else {
+    res.send(`nie znaleziono zestawu`);
+  }
+  
 });
 
 app.listen(port, () => {
