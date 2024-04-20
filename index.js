@@ -32,6 +32,9 @@ app.get('/sets/:name', (req, res) => {
 
 });
 
+app.get('*' , (req, res) => {
+  res.render('errors/404')});
+
 app.listen(port, () => {
   console.log(`app listening on port ${port}!`);
 });

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>product catalogue</title>
-</head>
-<body>
-    <h1>gift set: <%= name %></h1>
-</body>
-</html>
+<%- include('partials/header'); -%> 
+
+<% if(name) { %>
+<h1>zestaw: <%= name %></h1>
+<% } else { %>
+<h1>zestaw nie istnieje</h1>
+<% } %> 
+
+<%- include('partials/footer'); -%>
