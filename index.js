@@ -1,10 +1,16 @@
 const express = require('express');
 const port = 9999;
+const path = require('path');
 
 const app = express();
 
+//setting view engine
+app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, '/views'));
+
+
 app.get('/', (req, res) => {
-  res.send('homepage');
+  res.render("home")
 });
 
 app.get('/sets/:name', (req, res) => {
@@ -18,11 +24,12 @@ app.get('/sets/:name', (req, res) => {
 
   const giftSet = giftSets.find(s => s.slug === name);
   if (giftSet) {
-    res.send(`wybrałeś ${giftSet?.name}`);
+    res.render('giftset', { name })
+
   } else {
     res.send(`nie znaleziono zestawu`);
   }
-  
+
 });
 
 app.listen(port, () => {
