@@ -6,4 +6,10 @@
 <h1>zestaw nie istnieje</h1>
 <% } %> 
 
+<ul>
+    <% giftSets.forEach(giftSet => { %>
+        <li><a href="/sets/<%= giftSet.slug %>"><%= giftSet.name %></a></li>
+    <% }); %>
+</ul>
+
 <%- include('partials/footer'); -%>

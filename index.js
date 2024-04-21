@@ -10,7 +10,9 @@ app.set("views", path.join(__dirname, '/views'));
 
 
 app.get('/', (req, res) => {
-  res.render("home")
+  res.render("home", {
+    title: 'Strona główna'
+  })
 });
 
 app.get('/sets/:name', (req, res) => {
@@ -24,7 +26,11 @@ app.get('/sets/:name', (req, res) => {
 
   const giftSet = giftSets.find(s => s.slug === name);
   if (giftSet) {
-    res.render('giftset', { name })
+    res.render('giftset', { 
+      name: giftSet?.name,
+      giftSets: giftSets,
+      title: giftSet?.name ?? 'Brak wyników'  
+    })
 
   } else {
     res.send(`nie znaleziono zestawu`);
