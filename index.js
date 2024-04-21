@@ -12,6 +12,9 @@ app.set("views", path.join(__dirname, '/views'));
 app.use(ejsLayouts);
 app.set('layout', './layouts/main');
 
+//public directory
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
   res.render("pages/home", {
     title: 'Strona główna'
