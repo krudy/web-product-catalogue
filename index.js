@@ -17,7 +17,8 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render("pages/home", {
-    title: 'Strona główna'
+    title: 'Strona główna',
+    url: req.url
   })
 });
 
@@ -35,7 +36,8 @@ app.get('/sets/:name', (req, res) => {
     res.render('pages/giftset', { 
       name: giftSet?.name,
       giftSets: giftSets,
-      title: giftSet?.name ?? 'Brak wyników'  
+      title: giftSet?.name ?? 'Brak wyników',
+      url: req.url 
     })
 
   } else {
@@ -47,7 +49,8 @@ app.get('/sets/:name', (req, res) => {
 app.get('*' , (req, res) => {
   res.render('errors/404', {
     title: 'Nie znaleziono',
-    layout: 'layouts/minimalistic'
+    layout: 'layouts/minimalistic',
+    url: req.url
   })});
 
 app.listen(port, () => {
