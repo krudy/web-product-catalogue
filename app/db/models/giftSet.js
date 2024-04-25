@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://localhost:27017/mammaterra-catalogue');
 
-//model 
 const giftSetSchema = new Schema({
     slug: {
         type: String,
@@ -24,24 +22,4 @@ const giftSetSchema = new Schema({
 
 const GiftSet = mongoose.model('GiftSet', giftSetSchema);
 
-async function main() {
-
-    const giftSet = new GiftSet({
-        slug:'medium',
-        name:'średni zestaw',
-        price: 150
-    })
-
-    try {
-        await giftSet.save();
-
-    }catch (err) {
-        console.log('coś poszło nie tak...');
-        for (const key in err.errors) {
-                console.log(err.errors[key].message);
-            
-        }
-    }
-}
-
-main();
+module.exports = GiftSet;
