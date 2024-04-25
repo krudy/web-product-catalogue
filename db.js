@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost:27017/mammaterra-catalogue');
 
 //model 
-
-const GiftSet = mongoose.model('GiftSet', {
+const giftSetSchema = new Schema({
     slug: {
         type: String,
         required: [true, 'Slug jest wymagany'],
-        minLength: [3, 'minimalna liczba znaków to 3']
+        minLength: [3, 'minimalna liczba znaków to 3'],
+        trim: true,
+        lowercase: true
     },
-    name: {
+    name: { 
         type: String,
         required: [true, 'Nazwa jest wymagana']
     },
@@ -18,7 +20,9 @@ const GiftSet = mongoose.model('GiftSet', {
         type: Number,
         required: [true, 'Cena jest wymagana'],
         min: [1, 'Cena musi być większa niż 0']
-    }});
+    }})
+
+const GiftSet = mongoose.model('GiftSet', giftSetSchema);
 
 async function main() {
 
