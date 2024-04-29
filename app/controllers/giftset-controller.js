@@ -1,14 +1,8 @@
-const express = require('express');
-const router = new express.Router();
 
-router.get('/', (req, res) => {
-    res.render("pages/home", {
-      title: 'Strona główna',
-      url: req.url
-    })
-  });
-  
-  router.get('/sets/:name', (req, res) => {
+class GiftSetController {
+
+
+showGiftSets(req, res) {
     const { name } = req.params;
   
     const giftSets = [
@@ -30,13 +24,6 @@ router.get('/', (req, res) => {
       res.send(`nie znaleziono zestawu`);
     }
   
-  });
-  
-  router.get('*' , (req, res) => {
-    res.render('errors/404', {
-      title: 'Nie znaleziono',
-      layout: 'layouts/minimalistic',
-      url: req.url
-    })});
+  }}
 
-module.exports = router;
+  module.exports = new GiftSetController();
