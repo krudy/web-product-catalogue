@@ -9,6 +9,10 @@ router.get('/sets', GiftSetController.showGiftSets);
 
 router.get('/sets/:name', GiftSetController.showGiftSet);
 
+router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
+
+router.post('/admin/sets/add', GiftSetController.createGiftSet);
+
 router.get('*', PageController.notFound);
 
 module.exports = router;
