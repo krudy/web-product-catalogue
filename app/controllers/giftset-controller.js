@@ -11,8 +11,7 @@ async showGiftSets(req, res) {
 
   res.render('pages/giftSets', {
     giftSets: giftSets,
-    title: 'Zestawy',
-    url: req.url 
+    title: 'Zestawy'
   });
 
 }
@@ -24,8 +23,7 @@ async showGiftSet(req, res) {
     if (giftSet) {
       res.render('pages/giftset', { 
         name: giftSet?.name,
-        title: giftSet?.name ?? 'Brak wyników',
-        url: req.url 
+        title: giftSet?.name ?? 'Brak wyników'     
       })
   
     } else {

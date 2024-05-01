@@ -17,6 +17,9 @@ app.set('layout', './layouts/main');
 //public directory
 app.use(express.static('public'));
 
+//middleware
+app.use('/', require('./middleware/view-variables'))
+
 //mount routes
 app.use(require('./routes/web'));
 
