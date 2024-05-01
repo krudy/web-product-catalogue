@@ -8,7 +8,7 @@ require('./db/mongoose');
 
 //setting view engine
 app.set('view engine', 'ejs');
-app.set("views", path.join(__dirname, '/views'));
+app.set("views", path.join(__dirname, '/../views'));
 
 //setting layout
 app.use(ejsLayouts);
