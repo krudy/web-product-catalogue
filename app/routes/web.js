@@ -5,7 +5,9 @@ const PageController = require('../controllers/page-controller');
 
 router.get('/', PageController.home);
 
-router.get('/sets/:name', GiftSetController.showGiftSets);
+router.get('/sets', GiftSetController.showGiftSets);
+
+router.get('/sets/:name', GiftSetController.showGiftSet);
 
 router.get('*', PageController.notFound);
 

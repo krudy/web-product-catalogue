@@ -1,8 +1,14 @@
+const GiftSet = require('../db/models/GiftSet')
 
 class GiftSetController {
 
 
 showGiftSets(req, res) {
+
+
+}
+
+showGiftSet(req, res) {
     const { name } = req.params;
   
     const giftSets = [

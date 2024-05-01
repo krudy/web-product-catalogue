@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/mammaterra-catalogue';
+const { database } = require('../config');
 
-mongoose.connect(url);
+mongoose.connect(database);
