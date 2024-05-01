@@ -1,0 +1,8 @@
+<h1>Lista zestawów</h1>
+
+<ul>
+    <% giftSets.forEach(giftSet => { %>
+        <li><a href="/sets/<%= giftSet.slug %>"><%= giftSet.name %></a></li>
+    <% }); %>
+</ul>
+

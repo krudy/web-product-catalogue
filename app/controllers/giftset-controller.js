@@ -3,25 +3,27 @@ const GiftSet = require('../db/models/GiftSet')
 class GiftSetController {
 
 
-showGiftSets(req, res) {
+async showGiftSets(req, res) {
 
+  const giftSets = await GiftSet.find({});
+
+  console.log(giftSets);
+
+  res.render('pages/giftSets', {
+    giftSets: giftSets,
+    title: 'Zestawy',
+    url: req.url 
+  });
 
 }
 
-showGiftSet(req, res) {
+async showGiftSet(req, res) {
     const { name } = req.params;
   
-    const giftSets = [
-      { slug: 'small', name: 'mały zestaw', price: 50 },
-      { slug: 'medium', name: 'średni zestaw', price: 80 },
-      { slug: 'large', name: 'duży zestaw', price: 140 }
-    ]
-  
-    const giftSet = giftSets.find(s => s.slug === name);
+    const giftSet = await GiftSet.findOne({ slug: name });
     if (giftSet) {
       res.render('pages/giftset', { 
         name: giftSet?.name,
-        giftSets: giftSets,
         title: giftSet?.name ?? 'Brak wyników',
         url: req.url 
       })
