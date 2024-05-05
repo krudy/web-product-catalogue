@@ -6,7 +6,7 @@ const giftSetSchema = new Schema({
     slug: {
         type: String,
         required: [true, 'Slug jest wymagany'],
-        minLength: [3, 'minimalna liczba znaków to 3'],
+        minLength: [3, 'minimalna liczba znaków dla pola slug to 3'],
         trim: true,
         lowercase: true
     },

@@ -1,15 +1,50 @@
 <form method="post" action="/admin/sets/add">
   <div class="mb-3">
     <label for="" class="form-label">Nazwa</label>
-    <input class="form-control" type="text" name="name" />
+    <input  type="text"
+     value="<%= form.name %>"
+     name="name" 
+     class="form-control <%- errors?.name ? 'is-invalid' : '' %>" required/>
+     <% if (errors?.name) { %>
+        <div class="invalid-feedback">
+            <%= errors.name.message %>
+        </div>
+    <% } %>
   </div>
+  
   <div class="mb-3">
     <label for="" class="form-label">Slug</label>
-    <input class="form-control" type="text" name="slug" />
+    <input type="text" 
+    value="<%= form.slug %>"
+    name="slug" 
+     class="form-control <%- errors?.slug ? 'is-invalid' : '' %>" required/>
+    <% if (errors?.slug) { %>
+       <div class="invalid-feedback">
+           <%= errors.slug.message %>
+       </div>
+   <% } %>
   </div>
+
   <div class="mb-3">
     <label for="" class="form-label">Cena</label>
-    <input class="form-control" type="number" name="price" />
+    <input type="number"
+    value="<%= form.price %>" 
+    name="price"  
+    class="form-control <%- errors?.price ? 'is-invalid' : '' %>" required/>
+    <% if (errors?.price) { %>
+       <div class="invalid-feedback">
+           <%= errors.price.message %>
+       </div>
+   <% } %>
   </div>
+
   <button class="btn btn-primary">Dodaj zestaw</button>
 </form>
+
+<% if (errors) { %>
+    <div class="alert alert-danger mt-3">
+      <p>Niepoprawne dane</p>
+    </div>
+<% } %>
+
+
