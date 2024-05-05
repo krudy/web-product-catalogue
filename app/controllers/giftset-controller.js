@@ -22,9 +22,16 @@ async createGiftSet(req, res) {
     slug: req.body.slug.toLowerCase().split(' ').join('-')
   });
 
-  await giftSet.save();
-
-  res.redirect('/sets');
+  
+  try{
+    await giftSet.save();
+    res.redirect('/sets');
+  }catch (err) {
+    res.render('pages/giftsets/add', {
+      errors: err.errors,
+      form: req.body
+    });
+  }
 }
 
 showAddGiftSetForm(req, res) {
