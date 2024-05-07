@@ -14,6 +14,8 @@ async showGiftSets(req, res) {
 
 }
 
+//Adding Set
+
 async createGiftSet(req, res) {
 
   const giftSet = new GiftSet({
@@ -37,6 +39,39 @@ async createGiftSet(req, res) {
 showAddGiftSetForm(req, res) {
   res.render('pages/giftsets/add');
 }
+
+//Editing Set
+
+async showEditGiftSetForm(req, res) {
+
+  const { name } = req.params
+  const giftSet = await GiftSet.findOne({ slug: name})
+
+  res.render('pages/giftsets/edit', {
+    form: giftSet
+  });
+}
+
+async editGiftSet(req, res) {
+
+  const { name } = req.params
+  const giftSet = await GiftSet.findOne({ slug: name });
+  giftSet.name = req.body.name;
+  giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
+  giftSet.price = req.body.price;
+
+  
+  try{
+    await giftSet.save();
+    res.redirect('/sets');
+  }catch (err) {
+    res.render('pages/giftsets/edit', {
+      errors: err.errors,
+      form: req.body
+    });
+  }
+}
+
 
 async showGiftSet(req, res) {
     const { name } = req.params;
