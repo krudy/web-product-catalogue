@@ -72,6 +72,19 @@ async editGiftSet(req, res) {
   }
 }
 
+//Deleting Set
+
+async deleteGiftSet(req, res) {
+
+  const { name } = req.params
+  try {
+    await GiftSet.deleteOne({ slug: name }); 
+    res.redirect('/sets');
+  } catch (err) {
+    res.send(`Nie udało się usunąć zestawu`);
+  }
+}
+
 
 async showGiftSet(req, res) {
     const { name } = req.params;
