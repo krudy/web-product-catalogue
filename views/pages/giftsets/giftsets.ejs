@@ -1,8 +1,14 @@
 <h1>Lista zestawów</h1>
 
-<ul>
-    <% giftSets.forEach(giftSet => { %>
-        <li><a href="/sets/<%= giftSet.slug %>"><%= giftSet.name %></a></li>
-    <% }); %>
-</ul>
+<% giftSets.forEach(giftSet => { %> 
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <p class="h3 mb-4"><%= giftSet.name %></p>
+            <a href="/sets/<%= giftSet.slug %>" class="btn btn-primary">Zobacz</a>
+            <a href="admin/sets/<%= giftSet.slug %>/edit" class="btn btn-primary">Edytuj</a>
+            <a href="admin/sets/<%= giftSet.slug %>/delete" class="btn btn-primary">Usuń</a>
+        </div>
+    </div>
+    
+<% }); %>
 
