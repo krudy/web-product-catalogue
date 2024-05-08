@@ -15,6 +15,7 @@ router.post('/admin/sets/add', GiftSetController.createGiftSet);
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
 router.post('/admin/sets/:name/edit', GiftSetController.editGiftSet);
 
+router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);
 
 router.get('*', PageController.notFound);
 

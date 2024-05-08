@@ -1,8 +1,16 @@
 <h1>Lista zestawów</h1>
 
-<ul>
-    <% giftSets.forEach(giftSet => { %>
-        <li><a href="/sets/<%= giftSet.slug %>"><%= giftSet.name %></a></li>
-    <% }); %>
-</ul>
+<% giftSets.forEach(giftSet => { %> 
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <p class="h3 mb-4"><%= giftSet.name %></p>
+            <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success">Zobacz</a>
+            <a href="admin/sets/<%= giftSet.slug %>/edit" class="btn btn-outline-primary">Edytuj</a>
+            <a href="admin/sets/<%= giftSet.slug %>/delete" 
+                onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')" 
+                class="btn btn-outline-danger">Usuń</a>
+        </div>
+    </div>
+    
+<% }); %>
 
