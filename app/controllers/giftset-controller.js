@@ -5,7 +5,15 @@ class GiftSetController {
 
 async showGiftSets(req, res) {
 
-  const giftSets = await GiftSet.find({});
+  const { q } = req.query;
+
+  let giftSets;
+
+  if( q ) {
+    giftSets = await GiftSet.find({ name: { $regex: q, $options: 'i'}});
+  }else{
+    giftSets = await GiftSet.find({});
+  }
 
   res.render('pages/giftsets/giftSets', {
     giftSets: giftSets,
