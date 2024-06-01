@@ -2,17 +2,35 @@
 
 <%- include('partials/search') %>
 
-<% giftSets.forEach(giftSet => { %> 
+<div class="row">
+  <div class="col-3">
+    <form method="get">
+      <label for="sort" class="form-label">Sortuj wg</label>
+      <select name="sort" id="sort" class="form-control">
+        <option value="">Domyślnie</option>
+        <option value="name">A-Z</option>
+        <option value="price">Ceny</option>
+      </select>
+      <button class="btn btn-primary mt-3">Sortuj</button>
+    </form>
+  </div>
+  <div class="col-9">
+    <% giftSets.forEach(giftSet => { %>
     <div class="card bg-light mb-3">
-        <div class="card-body">
-            <p class="h3 mb-4"><%= giftSet.name %></p>
-            <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success">Zobacz</a>
-            <a href="admin/sets/<%= giftSet.slug %>/edit" class="btn btn-outline-primary">Edytuj</a>
-            <a href="admin/sets/<%= giftSet.slug %>/delete" 
-                onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')" 
-                class="btn btn-outline-danger">Usuń</a>
-        </div>
+      <div class="card-body">
+        <p class="h3 mb-4"><%= giftSet.name %></p>
+        <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success"
+          >Zobacz</a>
+        <a
+          href="admin/sets/<%= giftSet.slug %>/edit"
+          class="btn btn-outline-primary"
+          >Edytuj</a>
+        <a
+          href="admin/sets/<%= giftSet.slug %>/delete"
+          onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')"
+          class="btn btn-outline-danger">Usuń</a>
+      </div>
     </div>
-    
-<% }); %>
-
+    <% }); %>
+  </div>
+</div>
