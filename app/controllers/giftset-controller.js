@@ -3,111 +3,112 @@ const GiftSet = require('../db/models/GiftSet')
 class GiftSetController {
 
 
-async showGiftSets(req, res) {
+  async showGiftSets(req, res) {
 
-  const { q } = req.query;
+    const { q } = req.query;
 
-  let giftSets;
+    let giftSets;
 
-  if( q ) {
-    giftSets = await GiftSet.find({ name: { $regex: q, $options: 'i'}});
-  }else{
-    giftSets = await GiftSet.find({});
-  }
+    if (q) {
+      giftSets = await GiftSet.find({ name: { $regex: q || '', $options: 'i' } });
+    } else {
+      giftSets = await GiftSet.find({});
+    }
 
-  res.render('pages/giftsets/giftSets', {
-    giftSets: giftSets,
-    title: 'Zestawy'
-  });
-
-}
-
-//Adding Set
-
-async createGiftSet(req, res) {
-
-  const giftSet = new GiftSet({
-    name: req.body.name,
-    price: req.body.price,
-    slug: req.body.slug.toLowerCase().split(' ').join('-')
-  });
-
-  
-  try{
-    await giftSet.save();
-    res.redirect('/sets');
-  }catch (err) {
-    res.render('pages/giftsets/add', {
-      errors: err.errors,
-      form: req.body
+    res.render('pages/giftsets/giftSets', {
+      giftSets: giftSets,
+      title: 'Zestawy'
     });
+
   }
-}
 
-showAddGiftSetForm(req, res) {
-  res.render('pages/giftsets/add');
-}
+  //Adding Set
 
-//Editing Set
+  async createGiftSet(req, res) {
 
-async showEditGiftSetForm(req, res) {
+    const giftSet = new GiftSet({
+      name: req.body.name,
+      price: req.body.price,
+      slug: req.body.slug.toLowerCase().split(' ').join('-')
+    });
 
-  const { name } = req.params
-  const giftSet = await GiftSet.findOne({ slug: name})
 
-  res.render('pages/giftsets/edit', {
-    form: giftSet
-  });
-}
+    try {
+      await giftSet.save();
+      res.redirect('/sets');
+    } catch (err) {
+      res.render('pages/giftsets/add', {
+        errors: err.errors,
+        form: req.body
+      });
+    }
+  }
 
-async editGiftSet(req, res) {
+  showAddGiftSetForm(req, res) {
+    res.render('pages/giftsets/add');
+  }
 
-  const { name } = req.params
-  const giftSet = await GiftSet.findOne({ slug: name });
-  giftSet.name = req.body.name;
-  giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
-  giftSet.price = req.body.price;
+  //Editing Set
 
-  
-  try{
-    await giftSet.save();
-    res.redirect('/sets');
-  }catch (err) {
+  async showEditGiftSetForm(req, res) {
+
+    const { name } = req.params
+    const giftSet = await GiftSet.findOne({ slug: name })
+
     res.render('pages/giftsets/edit', {
-      errors: err.errors,
-      form: req.body
+      form: giftSet
     });
   }
-}
 
-//Deleting Set
+  async editGiftSet(req, res) {
 
-async deleteGiftSet(req, res) {
+    const { name } = req.params
+    const giftSet = await GiftSet.findOne({ slug: name });
+    giftSet.name = req.body.name;
+    giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
+    giftSet.price = req.body.price;
 
-  const { name } = req.params
-  try {
-    await GiftSet.deleteOne({ slug: name }); 
-    res.redirect('/sets');
-  } catch (err) {
-    res.send(`Nie udało się usunąć zestawu`);
+
+    try {
+      await giftSet.save();
+      res.redirect('/sets');
+    } catch (err) {
+      res.render('pages/giftsets/edit', {
+        errors: err.errors,
+        form: req.body
+      });
+    }
   }
-}
+
+  //Deleting Set
+
+  async deleteGiftSet(req, res) {
+
+    const { name } = req.params
+    try {
+      await GiftSet.deleteOne({ slug: name });
+      res.redirect('/sets');
+    } catch (err) {
+      res.send(`Nie udało się usunąć zestawu`);
+    }
+  }
 
 
-async showGiftSet(req, res) {
+  async showGiftSet(req, res) {
     const { name } = req.params;
-  
+
     const giftSet = await GiftSet.findOne({ slug: name });
     if (giftSet) {
-      res.render('pages/giftsets/giftset', { 
+      res.render('pages/giftsets/giftset', {
         name: giftSet?.name,
-        title: giftSet?.name ?? 'Brak wyników'     
+        title: giftSet?.name ?? 'Brak wyników'
       })
-  
+
     } else {
       res.send(`nie znaleziono zestawu`);
     }
-  
-  }}
 
-  module.exports = new GiftSetController();
+  }
+}
+
+module.exports = new GiftSetController();

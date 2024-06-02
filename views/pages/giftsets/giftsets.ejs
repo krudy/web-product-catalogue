@@ -1,24 +1,23 @@
 <h1>Lista zestawów</h1>
-
+<form>
 <%- include('partials/search') %>
 
 <div class="row">
   <div class="col-3">
-    <form method="get">
       <label for="sort" class="form-label">Sortuj wg</label>
       <select name="sort" id="sort" class="form-control">
         <option value="">Domyślnie</option>
-        <option value="name">A-Z</option>
-        <option value="price">Ceny</option>
+        <option value="name" <%- query.sort === "name" ? 'selected' : '' %>>A-Z</option>
+        <option value="price" <%- query.sort === "price" ? 'selected' : '' %>>Ceny</option>
       </select>
-      <button class="btn btn-primary mt-3">Sortuj</button>
-    </form>
+      <button class="btn btn-primary mt-3">Zastosuj</button>
   </div>
   <div class="col-9">
     <% giftSets.forEach(giftSet => { %>
     <div class="card bg-light mb-3">
       <div class="card-body">
         <p class="h3 mb-4"><%= giftSet.name %></p>
+        <p class="h3 mb-4"><%= giftSet.price %> zł</p>
         <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success"
           >Zobacz</a>
         <a
@@ -34,3 +33,4 @@
     <% }); %>
   </div>
 </div>
+</form>
