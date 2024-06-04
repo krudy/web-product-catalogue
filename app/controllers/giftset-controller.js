@@ -5,15 +5,14 @@ class GiftSetController {
 
   async showGiftSets(req, res) {
 
-    const { q } = req.query;
+    const { q, sort } = req.query;
 
-    let giftSets;
-
-    if (q) {
-      giftSets = await GiftSet.find({ name: { $regex: q || '', $options: 'i' } });
-    } else {
-      giftSets = await GiftSet.find({});
+    let query = GiftSet.find({ name: { $regex: q || '', $options: 'i' } });;
+    if (sort) {
+      query = query.sort({[sort]: 'asc'});
     }
+   
+    const giftSets = await query.exec();
 
     res.render('pages/giftsets/giftSets', {
       giftSets: giftSets,

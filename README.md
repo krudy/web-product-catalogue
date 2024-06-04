@@ -1,2 +1,2 @@
-# web-product-catalogue
- 3.40
+#web-product-catalogue
+10,56
