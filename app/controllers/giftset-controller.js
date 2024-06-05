@@ -9,7 +9,8 @@ class GiftSetController {
 
     let query = GiftSet.find({ name: { $regex: q || '', $options: 'i' } });;
     if (sort) {
-      query = query.sort({[sort]: 'asc'});
+      const s = sort.split('|');
+      query = query.sort({[s[0]]: s[1]});
     }
    
     const giftSets = await query.exec();
