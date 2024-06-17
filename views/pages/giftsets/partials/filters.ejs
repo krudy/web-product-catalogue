@@ -1,0 +1,24 @@
+<div class="mb-3">
+    <label for="sort" class="form-label">Sortuj wg</label>
+<select name="sort" id="sort" class="form-control">
+  <option value="">Domyślnie</option>
+  <option value="name|asc" <%- query.sort === "name|asc" ? 'selected' : '' %>>A-Z</option>
+  <option value="name|desc" <%- query.sort === "name|desc" ? 'selected' : '' %>>Z-A</option>
+  <option value="price|asc" <%- query.sort === "price|asc" ? 'selected' : '' %>>Ceny (rosnąco)</option>
+  <option value="price|desc" <%- query.sort === "price|desc" ? 'selected' : '' %>>Ceny (malejąco)</option>
+</select>
+</div>
+
+<div class="mb-3">
+    <label for="pricemin" class="form-label">Cena (min)</label>
+    <input type="number" value="<%- query.pricemin %>" class="form-control" id="pricemin" name="pricemin">
+</div>
+    
+<div class="mb-3">
+    <label for="pricemax" class="form-label">Cena (max)</label>
+    <input type="number" value="<%- query.pricemax %>"  class="form-control" id="pricemax" name="pricemax">
+</div>
+
+
+
+<button class="btn btn-primary mt-3">Zastosuj</button>
