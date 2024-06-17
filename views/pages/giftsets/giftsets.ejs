@@ -4,15 +4,9 @@
 
 <div class="row">
   <div class="col-3">
-      <label for="sort" class="form-label">Sortuj wg</label>
-      <select name="sort" id="sort" class="form-control">
-        <option value="">Domyślnie</option>
-        <option value="name|asc" <%- query.sort === "name|asc" ? 'selected' : '' %>>A-Z</option>
-        <option value="name|desc" <%- query.sort === "name|desc" ? 'selected' : '' %>>Z-A</option>
-        <option value="price|asc" <%- query.sort === "price|asc" ? 'selected' : '' %>>Ceny (rosnąco)</option>
-        <option value="price|desc" <%- query.sort === "price|desc" ? 'selected' : '' %>>Ceny (malejąco)</option>
-      </select>
-      <button class="btn btn-primary mt-3">Zastosuj</button>
+    
+    <%- include('partials/filters') %>
+
   </div>
   <div class="col-9">
     <% giftSets.forEach(giftSet => { %>

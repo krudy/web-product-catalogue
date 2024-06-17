@@ -5,9 +5,20 @@ class GiftSetController {
 
   async showGiftSets(req, res) {
 
-    const { q, sort } = req.query;
+    const { q, sort, pricemin, pricemax } = req.query;
 
-    let query = GiftSet.find({ name: { $regex: q || '', $options: 'i' } });;
+    const where = {};
+
+    if(q) {
+      where.name = { $regex: q || '', $options: 'i' };
+    }
+    if(pricemin || pricemax) {
+      where.price = {};
+    if(pricemin) {where.price.$gte = pricemin };
+    if(pricemax) {where.price.$lte = pricemax };
+    }
+
+    let query = GiftSet.find(where);
     if (sort) {
       const s = sort.split('|');
       query = query.sort({[s[0]]: s[1]});
