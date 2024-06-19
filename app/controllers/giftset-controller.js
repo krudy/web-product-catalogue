@@ -6,12 +6,17 @@ class GiftSetController {
   async showGiftSets(req, res) {
 
     const { q, sort, pricemin, pricemax } = req.query;
+    const page = 1;
+    const perPage = 2;
 
     const where = {};
 
+    // search
     if(q) {
       where.name = { $regex: q || '', $options: 'i' };
     }
+
+    //filters
     if(pricemin || pricemax) {
       where.price = {};
     if(pricemin) {where.price.$gte = pricemin };
@@ -19,16 +24,26 @@ class GiftSetController {
     }
 
     let query = GiftSet.find(where);
+
+    //pagination 
+    query = query.skip((page - 1) * perPage);
+    query = query.limit();
+
+    //sorting
     if (sort) {
       const s = sort.split('|');
       query = query.sort({[s[0]]: s[1]});
     }
    
+    //exec
     const giftSets = await query.exec();
 
     res.render('pages/giftsets/giftSets', {
       giftSets: giftSets,
-      title: 'Zestawy'
+      title: 'Zestawy',
+      page: page,
+      pagesCount: pagesCount,
+      resultsCount: resultsCount
     });
 
   }
