@@ -1,2 +1,2 @@
 #web-product-catalogue
-10,56
+2,49
