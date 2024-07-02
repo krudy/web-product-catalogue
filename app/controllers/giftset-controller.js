@@ -7,7 +7,7 @@ class GiftSetController {
 
     const { q, sort, pricemin, pricemax } = req.query;
     const page = 1;
-    const perPage = 2;
+    const perPage = 3;
 
     const where = {};
 
@@ -24,10 +24,12 @@ class GiftSetController {
     }
 
     let query = GiftSet.find(where);
+    const resultsCount = await GiftSet.find(where).count();
+    const pagesCount = resultsCount / perPage;
 
     //pagination 
     query = query.skip((page - 1) * perPage);
-    query = query.limit();
+    query = query.limit(perPage);
 
     //sorting
     if (sort) {
