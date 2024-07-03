@@ -6,7 +6,7 @@ class GiftSetController {
   async showGiftSets(req, res) {
 
     const { q, sort, pricemin, pricemax } = req.query;
-    const page = 1;
+    const page = req.query.page || 1;
     const perPage = 3;
 
     const where = {};
@@ -24,8 +24,7 @@ class GiftSetController {
     }
 
     let query = GiftSet.find(where);
-    const resultsCount = await GiftSet.find(where).count();
-    const pagesCount = resultsCount / perPage;
+    
 
     //pagination 
     query = query.skip((page - 1) * perPage);
@@ -39,6 +38,8 @@ class GiftSetController {
    
     //exec
     const giftSets = await query.exec();
+    const resultsCount = await GiftSet.find(where).count();
+    const pagesCount = Math.ceil(resultsCount / perPage);
 
     res.render('pages/giftsets/giftSets', {
       giftSets: giftSets,
