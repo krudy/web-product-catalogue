@@ -25,7 +25,7 @@ class GiftSetController {
 
     let query = GiftSet.find(where);
     const resultsCount = await GiftSet.find(where).count();
-    const pagesCount = resultsCount / perPage;
+    const pagesCount = Math.ceil(resultsCount / perPage);
 
     //pagination 
     query = query.skip((page - 1) * perPage);
