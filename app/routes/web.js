@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const GiftSetController = require('../controllers/giftset-controller');
+const UserController = require('../controllers/user-controller');
 const PageController = require('../controllers/page-controller');
 
 router.get('/', PageController.home);
@@ -8,6 +9,9 @@ router.get('/', PageController.home);
 router.get('/sets', GiftSetController.showGiftSets);
 
 router.get('/sets/:name', GiftSetController.showGiftSet);
+
+router.get('/registration', UserController.showRegister);
+router.post('/registration', UserController.register);
 
 router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
 router.post('/admin/sets/add', GiftSetController.createGiftSet);
