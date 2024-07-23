@@ -7,7 +7,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         lowercase: true,
-        unique: [true, "Ten adres email jest już zajęty"],
+        unique: true,
         validate: [validateEmail, "Nieprawidłowy format email"]
     },
     password: {
@@ -15,6 +15,13 @@ const userSchema = new Schema({
         required: true,
         minLenght: [5, "Hasło powinno zawierać przynajmniej 4 znaki"]
     }
+});
+
+userSchema.post('save', function(error, doc, next) {
+    if(error.code === 11000) {
+        error.errors = {email: {message: 'ten email jest już zajęty'}}
+    }
+    next(error);
 })
 
 const User = mongoose.model('User' , userSchema);
