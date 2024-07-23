@@ -14,14 +14,20 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        minLenght: [5, "Hasło powinno zawierać przynajmniej 4 znaki"]
+        minlength: [5, "Hasło powinno zawierać przynajmniej 4 znaki"]
     }
 });
 
-userSchema.path('password').set((value) => {
+
+userSchema.pre('save', function(next) {
+    const user = this;
+    if (!user.isModified('password')){
+        return next();
+    }
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(value, salt);
-    return hash
+    const hash = bcrypt.hashSync(user.password, salt);
+    user.password = hash;
+    next();
 })
 
 userSchema.post('save', function(error, doc, next) {
