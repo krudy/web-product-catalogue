@@ -12,6 +12,8 @@ router.get('/sets/:name', GiftSetController.showGiftSet);
 
 router.get('/registration', UserController.showRegister);
 router.post('/registration', UserController.register);
+router.get('/login', UserController.showLogin);
+router.post('/login', UserController.login);
 
 router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
 router.post('/admin/sets/add', GiftSetController.createGiftSet);
