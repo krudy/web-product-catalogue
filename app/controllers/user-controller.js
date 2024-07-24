@@ -23,6 +23,38 @@ class UserController {
             
         }
     }
+
+    showLogin(req, res) {
+        res.render('pages/auth/login');
+    }
+
+    async login(req, res) {
+
+
+        try {
+
+            const user = await User.findOne({ email: req.body.email });
+            if(!user) {
+               throw new Error('user not found')
+            }
+
+            const isValidPassword = false; //user.comparePassword(req.body.password);
+            if (!isValidPassword) {
+               throw new Error('wrong password') 
+            }
+
+            //login 
+            
+        } catch (error) {
+            return res.render('pages/auth/login', {
+                form: req.body,
+                errors: true
+            })
+        }
+       
+
+       
+    }
 }
 
 module.exports = new UserController();
