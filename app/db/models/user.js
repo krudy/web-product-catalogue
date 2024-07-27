@@ -18,6 +18,12 @@ const userSchema = new Schema({
     }
 });
 
+userSchema.methods = {
+    comparePassword(password) {
+        const user =  this;
+        return bcrypt.compareSync(password, user.password);
+    }
+}
 
 userSchema.pre('save', function(next) {
     const user = this;

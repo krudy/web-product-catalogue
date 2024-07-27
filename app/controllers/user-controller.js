@@ -29,7 +29,7 @@ class UserController {
     }
 
     async login(req, res) {
-
+        
 
         try {
 
@@ -38,7 +38,7 @@ class UserController {
                throw new Error('user not found')
             }
 
-            const isValidPassword = true; //user.comparePassword(req.body.password);
+            const isValidPassword = user.comparePassword(req.body.password);
             if (!isValidPassword) {
                throw new Error('wrong password') 
             }
