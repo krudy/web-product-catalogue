@@ -38,13 +38,20 @@ class UserController {
                throw new Error('user not found')
             }
 
-            const isValidPassword = false; //user.comparePassword(req.body.password);
+            const isValidPassword = true; //user.comparePassword(req.body.password);
             if (!isValidPassword) {
                throw new Error('wrong password') 
             }
 
             //login 
-            
+            req.session.user = {
+                _id: user._id,
+                email: user.email
+            };
+
+            res.redirect('/')
+
+
         } catch (error) {
             return res.render('pages/auth/login', {
                 form: req.body,

@@ -1,2 +1,6 @@
 
 <h1>Homepage</h1> 
+
+<% if(user) { %>
+    <p>Witaj <%- user.email %></p>
+<% } %>
