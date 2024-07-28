@@ -33,7 +33,9 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 //middleware
-app.use('/', require('./middleware/view-variables'))
+app.use('/', require('./middleware/view-variables'));
+app.use('/', require('./middleware/user-middleware'));
+
 
 //mount routes
 app.use(require('./routes/web'));
