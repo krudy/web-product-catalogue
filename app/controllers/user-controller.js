@@ -64,6 +64,11 @@ class UserController {
 
        
     }
+
+    logout(req, res) {
+        req.session.destroy();
+        res.redirect('/');
+    }
 }
 
 module.exports = new UserController();
