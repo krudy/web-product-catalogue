@@ -2,6 +2,14 @@
 <form>
 <%- include('partials/search') %>
 
+<% if(user.isAdmin) { %>
+  <div class="row">
+    <div class="col mb-5" >  
+      <a href="/admin/sets/add" class="btn btn-success">Dodaj zestaw</a>
+    </div>
+  </div>
+<% } %>
+
 <div class="row">
   <div class="col-3">
     
@@ -16,6 +24,7 @@
         <p class="h3 mb-4"><%= giftSet.price %> zł</p>
         <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success"
           >Zobacz</a>
+          <% if(user.isAdmin) { %>
         <a
           href="admin/sets/<%= giftSet.slug %>/edit"
           class="btn btn-outline-primary"
@@ -25,6 +34,7 @@
           onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')"
           class="btn btn-outline-danger">Usuń</a>
       </div>
+      <% } %>
     </div>
     <% }); %>
   </div>

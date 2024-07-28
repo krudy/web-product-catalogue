@@ -9,7 +9,8 @@ class UserController {
         
         const user = new User({
             email: req.body.email,
-            password: req.body.password          
+            password: req.body.password,
+            isAdmin: req.body.isAdmin          
     });
 
         try {
@@ -46,7 +47,8 @@ class UserController {
             //login 
             req.session.user = {
                 _id: user._id,
-                email: user.email
+                email: user.email,
+                isAdmin: user.isAdmin
             };
 
             res.redirect('/')
