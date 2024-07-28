@@ -15,6 +15,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         minlength: [5, "Hasło powinno zawierać przynajmniej 4 znaki"]
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -22,6 +26,10 @@ userSchema.methods = {
     comparePassword(password) {
         const user =  this;
         return bcrypt.compareSync(password, user.password);
+    },
+    setAdminStatus(isAdmin) {
+        this.isAdmin = isAdmin;
+        return this.save();
     }
 }
 
