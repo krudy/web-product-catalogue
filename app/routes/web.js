@@ -16,7 +16,7 @@ router.get('/login', UserController.showLogin);
 router.post('/login', UserController.login);
 router.get('/logout', UserController.logout);
 
-router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
+router.get('/admin/sets/add', require('../middleware/admin-check-mieddleware'),  GiftSetController.showAddGiftSetForm);
 router.post('/admin/sets/add', GiftSetController.createGiftSet);
 
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
