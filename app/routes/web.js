@@ -16,12 +16,13 @@ router.get('/login', UserController.showLogin);
 router.post('/login', UserController.login);
 router.get('/logout', UserController.logout);
 
+router.get('/profile', UserController.showEditProfileForm);
+router.post('/profile', UserController.update);
+
 router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
 router.post('/admin/sets/add', GiftSetController.createGiftSet);
-
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
 router.post('/admin/sets/:name/edit', GiftSetController.editGiftSet);
-
 router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);
 
 router.get('*', PageController.notFound);

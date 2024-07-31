@@ -69,6 +69,32 @@ class UserController {
         req.session.destroy();
         res.redirect('/');
     }
+
+    showEditProfileForm(req, res) {
+        res.render('pages/auth/profile', {
+            form: req.session.user
+        });
+    }
+
+    async update(req, res) {
+        const user = await User.findById(req.session.user._id);
+        user.email = req.body.email;
+
+        if (req.body.password){
+            user.password = req.body.password; 
+        }
+
+        try {
+            await user.save();
+            req.session.user.email = user.email;
+            res.redirect('/profile');
+        } catch (error) {
+            res.render('pages/auth/profile', {
+                form: req.body,
+                errors: error.errors
+            })
+        }
+    }
 }
 
 module.exports = new UserController();
