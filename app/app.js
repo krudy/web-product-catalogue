@@ -35,6 +35,7 @@ app.use(cookieParser());
 //middleware
 app.use('/', require('./middleware/view-variables'));
 app.use('/', require('./middleware/user-middleware'));
+app.use('/profile' , require('./middleware/user-session-middleware'));
 app.use('/admin', require('./middleware/admin-check-mieddleware'));
 
 
