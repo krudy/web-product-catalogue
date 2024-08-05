@@ -15,6 +15,7 @@
     <%- include('partials/filters') %>
 
   </div>
+  
   <div class="col-9">
     <% giftSets.forEach(giftSet => { %>
     <div class="card bg-light mb-3">
@@ -32,14 +33,17 @@
           href="admin/sets/<%= giftSet.slug %>/delete"
           onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')"
           class="btn btn-outline-danger">Usuń</a>
+          <% } %> 
+        </div>
       </div>
-      <% } %>
-    </div>
     <% }); %>
   </div>
 </div>
 
-<%- include('partials/pagination') %>
+
+
+  <%- include('partials/pagination') %>
+
 
 
 </form>
