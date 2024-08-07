@@ -4,6 +4,9 @@ const GiftSetController = require('../controllers/giftset-controller');
 const UserController = require('../controllers/user-controller');
 const PageController = require('../controllers/page-controller');
 
+const multer = require('multer');
+const upload = multer({ dest: 'public/uploads' });
+
 router.get('/', PageController.home);
 
 router.get('/sets', GiftSetController.showGiftSets);
@@ -22,7 +25,7 @@ router.post('/profile', UserController.update);
 router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
 router.post('/admin/sets/add', GiftSetController.createGiftSet);
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
-router.post('/admin/sets/:name/edit', GiftSetController.editGiftSet);
+router.post('/admin/sets/:name/edit', upload.single('image'), GiftSetController.editGiftSet);
 router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);
 
 router.get('*', PageController.notFound);
