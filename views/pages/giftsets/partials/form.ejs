@@ -1,5 +1,5 @@
 
-<form method="post" action= "<%- action %>">
+<form method="post" action= "<%- action %>" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="" class="form-label">Nazwa</label>
     <input  type="text"
@@ -11,6 +11,11 @@
             <%= errors.name.message %>
         </div>
     <% } %>
+  </div>
+
+  <div class="mb-3">
+    <label for="image" class="form-label">Zdjęcie</label>
+    <input type="file" name="image" id="image" class="form-control">
   </div>
   
   <div class="mb-3">
