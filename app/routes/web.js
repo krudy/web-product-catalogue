@@ -4,8 +4,18 @@ const GiftSetController = require('../controllers/giftset-controller');
 const UserController = require('../controllers/user-controller');
 const PageController = require('../controllers/page-controller');
 
+const path = require('path');
 const multer = require('multer');
-const upload = multer({ dest: 'public/uploads' });
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, 'public/uploads/');
+    },
+    filename: function(req, file, callback) {
+        const name = Date.now() + path.extname(file.originalname);
+        callback(null, name);
+    }
+});
+const upload = multer({ storage: storage});
 
 router.get('/', PageController.home);
 
