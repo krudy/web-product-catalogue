@@ -20,20 +20,27 @@
     <% giftSets.forEach(giftSet => { %>
     <div class="card bg-light mb-3">
       <div class="card-body">
-        <p class="h3 mb-4"><%= giftSet.name %></p>
-        <p class="h3 mb-4"><%= giftSet.price %> zł</p>
-        <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success"
-          >Zobacz</a>
-          <% if(user && user.isAdmin) { %>
-        <a
-          href="admin/sets/<%= giftSet.slug %>/edit"
-          class="btn btn-outline-primary"
-          >Edytuj</a>
-        <a
-          href="admin/sets/<%= giftSet.slug %>/delete"
-          onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')"
-          class="btn btn-outline-danger">Usuń</a>
-          <% } %> 
+        <div class="row">
+          <div class="col-3">
+            <img src="/uploads/<%- giftSet.image %>" class="img-fluid" alt="set image">
+          </div>
+          <div class="col-9">
+            <p class="h3 mb-4"><%= giftSet.name %></p>
+            <p class="h3 mb-4"><%= giftSet.price %> zł</p>
+            <a href="/sets/<%= giftSet.slug %>" class="btn btn-outline-success"
+              >Zobacz</a>
+              <% if(user && user.isAdmin) { %>
+            <a
+              href="admin/sets/<%= giftSet.slug %>/edit"
+              class="btn btn-outline-primary"
+              >Edytuj</a>
+            <a
+              href="admin/sets/<%= giftSet.slug %>/delete"
+              onclick="return confirm('Czy na pewno chcesz usunąć ten zestaw?')"
+              class="btn btn-outline-danger">Usuń</a>
+              <% } %> 
+          </div>
+        </div>
         </div>
       </div>
     <% }); %>
