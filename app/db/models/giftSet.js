@@ -18,7 +18,11 @@ const giftSetSchema = new Schema({
         type: Number,
         required: [true, 'Cena jest wymagana'],
         min: [1, 'Cena musi być większa niż 0']
-    }})
+    },
+    image: {
+        type: String
+    }
+})
 
 const GiftSet = mongoose.model('GiftSet', giftSetSchema);
 

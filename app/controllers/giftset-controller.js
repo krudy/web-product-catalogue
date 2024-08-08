@@ -96,6 +96,7 @@ class GiftSetController {
     giftSet.name = req.body.name;
     giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
     giftSet.price = req.body.price;
+    giftSet.image = req.file.filename;
 
 
     try {
