@@ -4,6 +4,7 @@ const GiftSetController = require('../controllers/giftset-controller');
 const UserController = require('../controllers/user-controller');
 const PageController = require('../controllers/page-controller');
 
+// Multer middleware for image uploads
 const path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({
