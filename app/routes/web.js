@@ -38,6 +38,7 @@ router.post('/admin/sets/add', upload.single('image'), GiftSetController.createG
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
 router.post('/admin/sets/:name/edit', upload.single('image'), GiftSetController.editGiftSet);
 router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);
+router.get('/admin/sets/:name/delete-image', GiftSetController.deleteImage);
 
 router.get('*', PageController.notFound);
 

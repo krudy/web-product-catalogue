@@ -13,10 +13,20 @@
     <% } %>
   </div>
 
+  <% if (showFile) { %>
+    <% if (form.image ) { %>
+      <div class="row">
+        <div class="col">
+          <img src="/uploads/<%- form.image %>" alt="<%- form.name %> zdjęcie" class="img-fluid">
+          <a href="/admin/sets/<%- form.slug %>/delete-image" class="btn btn-sm btn-danger">Usuń zdjęcie</a>
+        </div>
+      </div>
+    <% } %>
   <div class="mb-3">
     <label for="image" class="form-label">Zdjęcie</label>
     <input type="file" name="image" id="image" class="form-control">
   </div>
+  <% } %>
   
   <div class="mb-3">
     <label for="" class="form-label">Slug</label>
