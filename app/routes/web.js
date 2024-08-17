@@ -34,7 +34,7 @@ router.get('/profile', UserController.showEditProfileForm);
 router.post('/profile', UserController.update);
 
 router.get('/admin/sets/add', GiftSetController.showAddGiftSetForm);
-router.post('/admin/sets/add', GiftSetController.createGiftSet);
+router.post('/admin/sets/add', upload.single('image'), GiftSetController.createGiftSet);
 router.get('/admin/sets/:name/edit', GiftSetController.showEditGiftSetForm);
 router.post('/admin/sets/:name/edit', upload.single('image'), GiftSetController.editGiftSet);
 router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);

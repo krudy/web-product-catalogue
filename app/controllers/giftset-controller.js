@@ -7,7 +7,7 @@ class GiftSetController {
 
     const { q, sort, pricemin, pricemax } = req.query;
     const page = req.query.page || 1;
-    const perPage = 3;
+    const perPage = 4;
 
     const where = {};
 
@@ -58,7 +58,8 @@ class GiftSetController {
     const giftSet = new GiftSet({
       name: req.body.name,
       price: req.body.price,
-      slug: req.body.slug.toLowerCase().split(' ').join('-')
+      slug: req.body.slug.toLowerCase().split(' ').join('-'),
+      image: req.file ? req.file.filename : null
     });
 
 
@@ -96,7 +97,9 @@ class GiftSetController {
     giftSet.name = req.body.name;
     giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
     giftSet.price = req.body.price;
-    giftSet.image = req.file.filename;
+    if (req.file) {
+      giftSet.image = req.file.filename;
+    }
 
 
     try {
