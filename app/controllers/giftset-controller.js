@@ -1,4 +1,5 @@
-const GiftSet = require('../db/models/GiftSet')
+const GiftSet = require('../db/models/GiftSet');
+const fs = require('fs');
 
 class GiftSetController {
 
@@ -97,6 +98,11 @@ class GiftSetController {
     giftSet.name = req.body.name;
     giftSet.slug = req.body.slug.toLowerCase().split(' ').join('-');
     giftSet.price = req.body.price;
+
+    if (req.file.filename && giftSet.image){
+      fs.unlinkSync(`public/uploads/${giftSet.image}`);
+    }
+
     if (req.file) {
       giftSet.image = req.file.filename;
     }
@@ -119,10 +125,29 @@ class GiftSetController {
 
     const { name } = req.params
     try {
+      if (giftSet.image){
+        fs.unlinkSync(`public/uploads/${giftSet.image}`);
+      }
       await GiftSet.deleteOne({ slug: name });
       res.redirect('/sets');
     } catch (err) {
       res.send(`Nie udało się usunąć zestawu`);
+    }
+  }
+
+  // Deleting image
+
+  async deleteImage(req, res) {
+
+    const { name } = req.params
+    const giftSet = await GiftSet.findOne({ slug: name });
+    try {
+      fs.unlinkSync(`public/uploads/${giftSet.image}`);
+      giftSet.image = '';
+      await giftSet.save();
+      res.redirect('/sets');
+    } catch (err) {
+      res.send(`Nie udało się usunąć zdjęcia`);
     }
   }
 
