@@ -125,9 +125,6 @@ class GiftSetController {
 
     const { name } = req.params
     try {
-      if (giftSet.image){
-        fs.unlinkSync(`public/uploads/${giftSet.image}`);
-      }
       await GiftSet.deleteOne({ slug: name });
       res.redirect('/sets');
     } catch (err) {
