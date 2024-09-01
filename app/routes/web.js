@@ -3,20 +3,7 @@ const router = new express.Router();
 const GiftSetController = require('../controllers/giftset-controller');
 const UserController = require('../controllers/user-controller');
 const PageController = require('../controllers/page-controller');
-
-// Multer middleware for image uploads
-const path = require('path');
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, 'public/uploads/');
-    },
-    filename: function(req, file, callback) {
-        const name = Date.now() + path.extname(file.originalname);
-        callback(null, name);
-    }
-});
-const upload = multer({ storage: storage});
+const upload = require('../services/uploader');
 
 router.get('/', PageController.home);
 
