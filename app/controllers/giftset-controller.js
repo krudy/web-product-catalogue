@@ -1,5 +1,6 @@
 const GiftSet = require('../db/models/GiftSet');
 const fs = require('fs');
+const { Parser} = require('json2csv');
 
 class GiftSetController {
 
@@ -163,6 +164,34 @@ class GiftSetController {
       res.send(`nie znaleziono zestawu`);
     }
 
+  }
+
+  async getCSV(req, res) {
+    const fields = [
+      {
+        label: 'Nazwa',
+        value: 'name'
+      },
+      {
+        label: 'URL',
+        value: 'slug'
+      },
+      {
+        label: 'Cena',
+        value: 'price'
+      }
+    ];
+
+    const data = await GiftSet.find();
+    const fileName = 'mammaterra.csv';
+
+    const json2csv = new Parser( {fields});
+    const csv = json2csv.parse(data);
+
+    //sending csv file
+    res.header('Content-Type', 'text/csv');
+    res.attachment(fileName);
+    res.send(csv);
   }
 }
 

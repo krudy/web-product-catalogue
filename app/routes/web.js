@@ -27,6 +27,8 @@ router.post('/admin/sets/:name/edit', upload.single('image'), GiftSetController.
 router.get('/admin/sets/:name/delete', GiftSetController.deleteGiftSet);
 router.get('/admin/sets/:name/delete-image', GiftSetController.deleteImage);
 
+router.get('/csv', GiftSetController.getCSV);
+
 router.get('*', PageController.notFound);
 
 module.exports = router;
