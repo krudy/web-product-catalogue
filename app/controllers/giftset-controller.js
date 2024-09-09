@@ -186,10 +186,13 @@ class GiftSetController {
     const fileName = 'mammaterra.csv';
 
     const json2csv = new Parser( {fields});
-    const csv = json2csv.parse(data);
+    let csv = json2csv.parse(data);
+
+    // adding BOM to make UTF-8 file compatible with Excel
+    csv = '\uFEFF' + csv;
 
     //sending csv file
-    res.header('Content-Type', 'text/csv');
+    res.header('Content-Type', 'text/csv; charset=utf-8');
     res.attachment(fileName);
     res.send(csv);
   }
