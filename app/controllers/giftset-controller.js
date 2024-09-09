@@ -164,6 +164,10 @@ class GiftSetController {
     }
 
   }
+
+  getCSV(req, res) {
+  
+  }
 }
 
 module.exports = new GiftSetController();
