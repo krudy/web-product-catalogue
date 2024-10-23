@@ -1,3 +1,9 @@
 .site-logo {
   max-height: 80px;
 }
+
+body {
+  min-height: 100vh;
+  background: rgb(219, 220, 178);
+  background: linear-gradient(133deg, rgb(223, 220, 178) 0%, rgb(194, 174, 127) 100%);
+}
