@@ -20,7 +20,7 @@ This is a web application developed using Express.js, MongoDB and EJS. The main 
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Launching the application](#starting-application)
-- [Functionality](#functionality)
+- [Features](#features)
 - [API Endpoints](#api-endpoints)
 - [Web routes](#web-routes)
 - [Directory structure](#directory-structure)
@@ -56,3 +56,29 @@ cd web-product-catalogue
 ```bash
 npm install
 ```
+
+## Configuration
+
+Create an .env file and configure it:
+
+```js
+PORT=9999
+DATABASE=your_mongodb_uri
+SESSION_KEY_SECRET=your_session_secret_key
+```
+
+## Launching the application
+
+starting the application in development mode
+```bash
+npm run watch
+```
+
+## Features
+
+- <strong>Gift set management</strong> - viewing, adding, editing and deleting products
+- <strong>User registration and log-in</strong> - registration and log-in forms, user authorisation
+- <strong>Administration panel</strong> - managing product catalogue contents
+- <strong>Exporting data to CSV</strong> - downloading CSV files with the list of products
+- <strong>Searching and filtering</strong> - possibility of searching for products and filtering by price
+- <strong>Middleware</strong> - ensuring secure access to the administration panel and user sessions
